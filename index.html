@@ -3,449 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LovkoTech Budget Calculator</title>
+    <title>LovkoTech Budget - $15,900</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f5f5f5;
+            background-color: #f8f9fa;
+            color: #333;
         }
         .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        h1 {
-            color: #2c5aa0;
+        .header {
             text-align: center;
             margin-bottom: 30px;
-        }
-        .export-buttons {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .export-btn {
-            background: #4CAF50;
+            padding: 20px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0 10px;
-            font-size: 14px;
+            border-radius: 12px;
         }
-        .export-btn:hover {
-            background: #45a049;
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .header .amount {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .header .euro {
+            font-size: 18px;
+            opacity: 0.9;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
-            font-size: 12px;
-        }
-        th {
-            background-color: #FFC107;
-            color: #333;
-            padding: 12px 8px;
-            text-align: center;
-            border: 1px solid #ddd;
-            font-weight: bold;
-        }
-        td {
-            padding: 10px 8px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        .category-header {
-            background-color: #E3F2FD;
-            font-weight: bold;
-            text-align: left;
-        }
-        .subcategory {
-            background-color: #F9F9F9;
-            font-style: italic;
-        }
-        .total-row {
-            background-color: #FFE0B2;
-            font-weight: bold;
-        }
-        .final-total {
-            background-color: #FFC107;
-            font-weight: bold;
+            margin-bottom: 20px;
             font-size: 14px;
         }
-        .percentage {
-            font-size: 11px;
-            color: #666;
+        th {
+            background: #FFC107;
+            color: #333;
+            padding: 15px 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-weight: bold;
         }
-        .efficiency-table {
-            margin-top: 30px;
-        }
-        .efficiency-table th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .chart-container {
-            margin-top: 30px;
+        th.center {
             text-align: center;
+        }
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+        .category-row {
+            background: #E3F2FD;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .category-row td:first-child {
+            color: #1976D2;
+        }
+        .subcategory-row {
+            background: #f9f9f9;
+        }
+        .total-row {
+            background: #FFE0B2;
+            font-weight: bold;
+            border-top: 2px solid #FF9800;
+        }
+        .final-total {
+            background: #FFC107;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+        .amount {
+            text-align: right;
+            font-weight: 600;
+        }
+        .percentage {
+            color: #666;
+            font-size: 12px;
+        }
+        .icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+        .summary {
+            background: #E8F5E8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        .summary h3 {
+            color: #2E7D32;
+            margin-top: 0;
+        }
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .benefit-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        .benefit-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1976D2;
+        }
+        .benefit-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>💰 LovkoTech - Детальний бюджет по рівнях фінансування</h1>
-        
-        <div class="export-buttons">
-            <button class="export-btn" onclick="exportToCSV()">📊 Експорт в CSV</button>
-            <button class="export-btn" onclick="exportToExcel()">📋 Експорт в Excel</button>
-            <button class="export-btn" onclick="window.print()">🖨️ Друк</button>
+        <div class="header">
+            <h1>💰 LovkoTech - Детальний бюджет</h1>
+            <div class="amount">$15,900</div>
+            <div class="euro">€15,000</div>
+            <div style="margin-top: 10px; font-size: 16px;">Рівень 3 - Максимальний вплив</div>
         </div>
 
-        <table id="mainTable">
+        <table>
             <thead>
                 <tr>
-                    <th>Категорія</th>
-                    <th>Позиція/Найменування</th>
-                    <th>Ціна/од</th>
-                    <th>Рівень 1 ($5,300)<br><span class="percentage">€5,000</span></th>
-                    <th>Рівень 2 ($10,600)<br><span class="percentage">€10,000</span></th>
-                    <th>Рівень 3 ($15,900)<br><span class="percentage">€15,000</span></th>
+                    <th style="width: 25%;">Категорія</th>
+                    <th style="width: 35%;">Позиція/Найменування</th>
+                    <th style="width: 15%;" class="center">Ціна/од</th>
+                    <th style="width: 25%;" class="center">Кількість / Сума</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- КОМАНДА -->
-                <tr class="category-header">
-                    <td>👥 КОМАНДА</td>
-                    <td>Період роботи</td>
-                    <td>-</td>
-                    <td>2 місяці</td>
-                    <td>2.5 місяці</td>
-                    <td>3 місяці</td>
+                <tr class="category-row">
+                    <td><span class="icon">👥</span>КОМАНДА</td>
+                    <td><strong>Період роботи: 3 місяці</strong></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Бухгалтер</td>
-                    <td>$450/міс</td>
-                    <td>$900</td>
-                    <td>$1,125</td>
-                    <td>$1,350</td>
+                    <td class="amount">$450/міс</td>
+                    <td class="amount">3 міс / $1,350</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Ментор</td>
-                    <td>$1,000/міс</td>
-                    <td>$2,000</td>
-                    <td>$2,500</td>
-                    <td>$3,000</td>
+                    <td class="amount">$1,000/міс</td>
+                    <td class="amount">3 міс / $3,000</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Технічний директор</td>
-                    <td>$1,000/міс</td>
-                    <td>$2,000</td>
-                    <td>$2,500</td>
-                    <td>$3,000</td>
+                    <td class="amount">$1,000/міс</td>
+                    <td class="amount">3 міс / $3,000</td>
                 </tr>
                 <tr class="total-row">
                     <td></td>
                     <td><strong>Підсума команда</strong></td>
-                    <td>$2,450/міс</td>
-                    <td><strong>$4,900 (92.5%)</strong></td>
-                    <td><strong>$6,125 (57.8%)</strong></td>
-                    <td><strong>$7,350 (46.2%)</strong></td>
+                    <td class="amount">$2,450/міс</td>
+                    <td class="amount"><strong>$7,350 (46.2%)</strong></td>
                 </tr>
 
                 <!-- ОБЛАДНАННЯ -->
-                <tr class="category-header">
-                    <td>🔧 ОБЛАДНАННЯ</td>
-                    <td>Для лабораторій</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                <tr class="category-row">
+                    <td><span class="icon">🔧</span>ОБЛАДНАННЯ</td>
+                    <td><strong>Для лабораторій</strong></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Паяльні станції</td>
-                    <td>$150</td>
-                    <td>1 шт / $150</td>
-                    <td>3 шт / $450</td>
-                    <td>5 шт / $750</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>3D принтер бюджетний</td>
-                    <td>$100</td>
-                    <td>1 шт / $100</td>
-                    <td>0 шт / $0</td>
-                    <td>0 шт / $0</td>
+                    <td class="amount">$150</td>
+                    <td class="amount">5 шт / $750</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>3D принтер стандартний</td>
-                    <td>$600</td>
-                    <td>0 шт / $0</td>
-                    <td>2 шт / $1,200</td>
-                    <td>3 шт / $1,800</td>
+                    <td class="amount">$600</td>
+                    <td class="amount">3 шт / $1,800</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Витратні матеріали</td>
-                    <td>$50</td>
-                    <td>0 / $0</td>
-                    <td>4 набори / $200</td>
-                    <td>6 наборів / $300</td>
+                    <td class="amount">$50</td>
+                    <td class="amount">6 наборів / $300</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Інструменти</td>
-                    <td>$75</td>
-                    <td>0 / $0</td>
-                    <td>2 набори / $150</td>
-                    <td>2 набори / $150</td>
+                    <td class="amount">$75</td>
+                    <td class="amount">2 набори / $150</td>
                 </tr>
                 <tr class="total-row">
                     <td></td>
                     <td><strong>Підсума обладнання</strong></td>
-                    <td>-</td>
-                    <td><strong>$250 (4.7%)</strong></td>
-                    <td><strong>$2,000 (18.9%)</strong></td>
-                    <td><strong>$3,000 (18.9%)</strong></td>
+                    <td class="center">-</td>
+                    <td class="amount"><strong>$3,000 (18.9%)</strong></td>
                 </tr>
 
                 <!-- ПРОДУКЦІЯ -->
-                <tr class="category-header">
-                    <td>📦 ПРОДУКЦІЯ</td>
-                    <td>Конструктори та матеріали</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                <tr class="category-row">
+                    <td><span class="icon">📦</span>ПРОДУКЦІЯ</td>
+                    <td><strong>Конструктори та матеріали</strong></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Конструктори LovkoTech</td>
-                    <td>$20</td>
-                    <td>5 шт / $100</td>
-                    <td>40 шт / $800</td>
-                    <td>60 шт / $1,200</td>
+                    <td class="amount">$20</td>
+                    <td class="amount">60 шт / $1,200</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Додаткові компоненти</td>
-                    <td>$10</td>
-                    <td>0 / $0</td>
-                    <td>40 шт / $400</td>
-                    <td>80 шт / $800</td>
+                    <td class="amount">$10</td>
+                    <td class="amount">80 шт / $800</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Банери великі</td>
-                    <td>$50</td>
-                    <td>0 / $0</td>
-                    <td>2 шт / $100</td>
-                    <td>4 шт / $200</td>
+                    <td class="amount">$50</td>
+                    <td class="amount">4 шт / $200</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Банери малі</td>
-                    <td>$25</td>
-                    <td>0 / $0</td>
-                    <td>4 шт / $100</td>
-                    <td>8 шт / $200</td>
+                    <td class="amount">$25</td>
+                    <td class="amount">8 шт / $200</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Демо-станції</td>
-                    <td>$50</td>
-                    <td>0 / $0</td>
-                    <td>2 шт / $100</td>
-                    <td>2 шт / $100</td>
+                    <td class="amount">$50</td>
+                    <td class="amount">2 шт / $100</td>
                 </tr>
                 <tr class="total-row">
                     <td></td>
                     <td><strong>Підсума продукція</strong></td>
-                    <td>-</td>
-                    <td><strong>$100 (1.9%)</strong></td>
-                    <td><strong>$1,500 (14.2%)</strong></td>
-                    <td><strong>$2,500 (15.7%)</strong></td>
+                    <td class="center">-</td>
+                    <td class="amount"><strong>$2,500 (15.7%)</strong></td>
                 </tr>
 
                 <!-- ІВЕНТИ -->
-                <tr class="category-header">
-                    <td>🎪 ІВЕНТИ</td>
-                    <td>STEM-заходи</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Малі івенти (25 дітей)</td>
-                    <td>$50</td>
-                    <td>1 шт / $50</td>
-                    <td>3 шт / $150</td>
-                    <td>0 / $0</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Стандартні івенти (40 дітей)</td>
-                    <td>$325</td>
-                    <td>0 / $0</td>
-                    <td>2 шт / $650</td>
-                    <td>0 / $0</td>
+                <tr class="category-row">
+                    <td><span class="icon">🎪</span>ІВЕНТИ</td>
+                    <td><strong>STEM-заходи</strong></td>
+                    <td class="center">-</td>
+                    <td class="center">-</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Великий чемпіонат (100+ дітей)</td>
-                    <td>$3,000</td>
-                    <td>0 / $0</td>
-                    <td>0 / $0</td>
-                    <td>1 шт / $3,000</td>
+                    <td class="amount">$3,000</td>
+                    <td class="amount">1 шт / $3,000</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>Навчання вчителів</td>
-                    <td>$25</td>
-                    <td>0 / $0</td>
-                    <td>7 осіб / $175</td>
-                    <td>2 заходи / $50</td>
+                    <td class="amount">$25</td>
+                    <td class="amount">2 заходи / $50</td>
                 </tr>
                 <tr class="total-row">
                     <td></td>
                     <td><strong>Підсума івенти</strong></td>
-                    <td>-</td>
-                    <td><strong>$50 (0.9%)</strong></td>
-                    <td><strong>$975 (9.2%)</strong></td>
-                    <td><strong>$3,050 (19.2%)</strong></td>
+                    <td class="center">-</td>
+                    <td class="amount"><strong>$3,050 (19.2%)</strong></td>
                 </tr>
 
                 <!-- ЗАГАЛЬНИЙ ПІДСУМОК -->
                 <tr class="final-total">
                     <td colspan="3"><strong>🎯 ЗАГАЛЬНИЙ БЮДЖЕТ</strong></td>
-                    <td><strong>$5,300</strong></td>
-                    <td><strong>$10,600</strong></td>
                     <td><strong>$15,900</strong></td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Таблиця ефективності -->
-        <table class="efficiency-table">
-            <thead>
-                <tr>
-                    <th>📊 Показники ефективності</th>
-                    <th>Рівень 1</th>
-                    <th>Рівень 2</th>
-                    <th>Рівень 3</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Період реалізації</td>
-                    <td>2 місяці</td>
-                    <td>2.5 місяці</td>
-                    <td>3 місяці</td>
-                </tr>
-                <tr>
-                    <td>Університети</td>
-                    <td>0-1</td>
-                    <td>1</td>
-                    <td>1-2</td>
-                </tr>
-                <tr>
-                    <td>Школи</td>
-                    <td>1</td>
-                    <td>2-3</td>
-                    <td>3-4</td>
-                </tr>
-                <tr>
-                    <td>Конструктори</td>
-                    <td>5 шт</td>
-                    <td>40 шт</td>
-                    <td>60 шт</td>
-                </tr>
-                <tr>
-                    <td>Охоплення дітей</td>
-                    <td>25</td>
-                    <td>120</td>
-                    <td>100+</td>
-                </tr>
-                <tr style="background-color: #E8F5E8;">
-                    <td><strong>Вартість на дитину</strong></td>
-                    <td><strong>$212</strong></td>
-                    <td><strong>$88</strong></td>
-                    <td><strong>$159</strong></td>
-                </tr>
-                <tr>
-                    <td>3D принтери</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>Паяльні станції</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>5</td>
-                </tr>
-                <tr style="background-color: #FFF3CD;">
-                    <td><strong>Медіа-ефект</strong></td>
-                    <td><strong>Низький</strong></td>
-                    <td><strong>Середній</strong></td>
-                    <td><strong>Високий</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="summary">
+            <h3>📊 Результати за 3 місяці</h3>
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="benefit-number">1-2</div>
+                    <div class="benefit-text">Університети з лабораторіями</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">3-4</div>
+                    <div class="benefit-text">Школи в програмі</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">100+</div>
+                    <div class="benefit-text">Дітей на чемпіонаті</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">60</div>
+                    <div class="benefit-text">Конструкторів</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">5</div>
+                    <div class="benefit-text">Паяльних станцій</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">3</div>
+                    <div class="benefit-text">3D принтери</div>
+                </div>
+            </div>
+        </div>
 
-        <div class="chart-container">
-            <h3>📈 Рекомендація: Рівень 3 ($15,900) для максимального впливу</h3>
-            <p><strong>Переваги:</strong> Великий чемпіонат на 100+ учасників, потужний медіа-ефект, створення мережі партнерів</p>
+        <div style="background: #FFF3CD; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #FFC107;">
+            <h4 style="color: #856404; margin-top: 0;">🏆 Ключові переваги рівня $15,900:</h4>
+            <ul style="color: #856404; margin: 0;">
+                <li><strong>Великий регіональний STEM-чемпіонат</strong> на 100+ учасників</li>
+                <li><strong>Потужний медіа-ефект</strong> та впізнаваність бренду</li>
+                <li><strong>Створення мережі партнерів</strong> для подальшого масштабування</li>
+                <li><strong>Професійне обладнання</strong> для якісних лабораторій</li>
+                <li><strong>3 місяці роботи команди</strong> для стабільного розвитку</li>
+            </ul>
         </div>
     </div>
-
-    <script>
-        function exportToCSV() {
-            const table = document.getElementById('mainTable');
-            let csv = [];
-            
-            // Заголовки
-            const headers = [];
-            table.querySelectorAll('thead tr th').forEach(th => {
-                headers.push('"' + th.textContent.replace(/"/g, '""') + '"');
-            });
-            csv.push(headers.join(','));
-            
-            // Дані
-            table.querySelectorAll('tbody tr').forEach(tr => {
-                const row = [];
-                tr.querySelectorAll('td').forEach(td => {
-                    row.push('"' + td.textContent.replace(/"/g, '""') + '"');
-                });
-                csv.push(row.join(','));
-            });
-            
-            // Завантаження
-            const csvContent = csv.join('\n');
-            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'LovkoTech_Budget.csv';
-            link.click();
-        }
-        
-        function exportToExcel() {
-            const table = document.getElementById('mainTable');
-            const workbook = XLSX.utils.table_to_book(table);
-            XLSX.writeFile(workbook, 'LovkoTech_Budget.xlsx');
-        }
-    </script>
-    
-    <!-- Додаємо XLSX library для експорту в Excel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
